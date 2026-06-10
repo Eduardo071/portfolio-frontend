@@ -71,6 +71,10 @@
           <div class="form__feedback form__feedback--error">✕ Erro ao enviar. Tente pelo e-mail diretamente.</div>
         }
 
+        @if (slowWarning()) {
+          <div class="form__feedback form__feedback--warn">⏳ Servidor acordando, pode levar até 30s na primeira vez…</div>
+        }
+
         <button type="submit" class="btn btn--primary" [class.btn--loading]="status() === 'sending'" [disabled]="status() === 'sending'">
           @if (status() === 'sending') { Enviando... } @else { Enviar mensagem → }
         </button>

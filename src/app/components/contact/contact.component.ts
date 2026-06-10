@@ -1,4 +1,4 @@
-import { Component, Input, inject, signal } from '@angular/core';
+import { Component, Input, inject, signal, OnDestroy } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { PersonalInfo } from '../../models/profile.model';
 import { ContactService } from '../../services/contact.service';
@@ -10,13 +10,15 @@ import { ContactService } from '../../services/contact.service';
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css',
 })
-export class ContactComponent {
+export class ContactComponent implements OnDestroy {
   @Input() personal!: PersonalInfo;
 
   private readonly fb = inject(FormBuilder);
   private readonly contactService = inject(ContactService);
 
   status = signal<'idle' | 'sending' | 'success' | 'error'>('idle');
+  slowWarning = signal(false);
+  private slowTimer?: ReturnType<typeof setTimeout>;
 
   form = this.fb.nonNullable.group({
     name:    ['', [Validators.required, Validators.minLength(2)]],
@@ -28,9 +30,19 @@ export class ContactComponent {
   submit() {
     if (this.form.invalid) { this.form.markAllAsTouched(); return; }
     this.status.set('sending');
+    this.slowWarning.set(false);
+    this.slowTimer = setTimeout(() => this.slowWarning.set(true), 5000);
+
     this.contactService.send(this.form.getRawValue()).subscribe({
-      next:  () => { this.status.set('success'); this.form.reset(); },
-      error: () => this.status.set('error'),
+      next: () => {
+        this.clearSlowTimer();
+        this.status.set('success');
+        this.form.reset();
+      },
+      error: () => {
+        this.clearSlowTimer();
+        this.status.set('error');
+      },
     });
   }
 
@@ -38,4 +50,11 @@ export class ContactComponent {
     const c = this.form.get(field);
     return c?.invalid && c?.touched;
   }
+
+  private clearSlowTimer() {
+    clearTimeout(this.slowTimer);
+    this.slowWarning.set(false);
+  }
+
+  ngOnDestroy() { this.clearSlowTimer(); }
 }
