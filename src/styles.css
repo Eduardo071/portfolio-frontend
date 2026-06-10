@@ -125,4 +125,6 @@ strong { font-weight: 600; }
 @media (max-width: 640px) {
   .container { padding: 0 1.25rem; }
   .section { padding: 4rem 0; }
+  .stats__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .stats__item { padding: 0 .5rem; }
 }
