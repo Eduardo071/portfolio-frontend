@@ -1,0 +1,18 @@
+<nav class="nav" [class.nav--scrolled]="scrolled()">
+  <div class="container nav__inner">
+    <a href="#top" class="nav__logo">EB<span class="accent">.</span></a>
+
+    <ul class="nav__links" [class.nav--open]="mobileOpen()">
+      <li><a href="#about" (click)="closeMenu()">Sobre</a></li>
+      <li><a href="#experience" (click)="closeMenu()">Experiência</a></li>
+      <li><a href="#stack" (click)="closeMenu()">Stack</a></li>
+      <li><a href="#contact" (click)="closeMenu()">Contato</a></li>
+    </ul>
+
+    <a href="/curriculo_eduardo_borges.docx" download="curriculo_eduardo_borges.docx" class="btn btn--outline btn--sm">↓ Currículo</a>
+
+    <button class="nav__toggle" (click)="toggleMobile()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>

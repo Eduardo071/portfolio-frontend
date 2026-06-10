@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Eduardo Borges · Backend Engineer</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Eduardo Borges — Backend Engineer II na PicPay. Especialista em Java, Spring Boot e microsserviços de alta escala.">
+  <meta property="og:title" content="Eduardo Borges · Backend Engineer">
+  <meta property="og:description" content="Backend Engineer II na PicPay. Java, Spring Boot, microsserviços de alta escala e Angular.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script>
+    // Scroll reveal — runs after Angular hydrates
+    function initReveal() {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((e, i) => {
+          if (!e.isIntersecting) return;
+          const siblings = [...e.target.parentElement.querySelectorAll('.reveal:not(.visible)')];
+          e.target.style.transitionDelay = Math.min(siblings.indexOf(e.target) * 80, 320) + 'ms';
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    }
+    document.addEventListener('DOMContentLoaded', () => setTimeout(initReveal, 300));
+  </script>
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>

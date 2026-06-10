@@ -1,0 +1,23 @@
+<section class="section" id="stack">
+  <div class="container">
+    <div class="section__label">// tech stack</div>
+    <h2 class="section__title">Habilidades técnicas</h2>
+    <div class="stack__grid">
+      @for (cat of skills; track cat.name) {
+        <div class="stack__cat reveal">
+          <h4 class="stack__cat-name">
+            <span>{{ cat.icon }}</span> {{ cat.name }}
+          </h4>
+          <div class="stack__chips">
+            @for (skill of cat.primary; track skill) {
+              <span class="chip chip--primary">{{ skill }}</span>
+            }
+            @for (skill of cat.secondary; track skill) {
+              <span class="chip">{{ skill }}</span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

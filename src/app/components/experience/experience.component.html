@@ -1,0 +1,43 @@
+<section class="section section--alt" id="experience">
+  <div class="container">
+    <div class="section__label">// experience</div>
+    <h2 class="section__title">Experiência profissional</h2>
+
+    <div class="timeline">
+      @for (exp of experiences; track exp.company; let first = $first) {
+        <div class="timeline__item reveal">
+          <div class="timeline__marker">
+            <div class="timeline__dot" [class.timeline__dot--active]="first"></div>
+            @if (!$last) { <div class="timeline__line"></div> }
+          </div>
+          <div class="timeline__body">
+            <div class="exp__header">
+              <div class="exp__company-row">
+                <h3 class="exp__company">{{ exp.company }}</h3>
+                <span class="exp__location">{{ exp.location }}</span>
+              </div>
+              <div class="exp__roles-stack">
+                @for (role of exp.roles; track role.title) {
+                  <div class="exp__role" [class.exp__role--sub]="!role.current && exp.roles.length > 1">
+                    <span class="exp__role-name">{{ role.title }}</span>
+                    <span class="exp__period" [class.exp__period--current]="role.current">{{ role.period }}</span>
+                  </div>
+                }
+              </div>
+            </div>
+            <ul class="exp__bullets">
+              @for (bullet of exp.bullets; track bullet) {
+                <li [innerHTML]="bullet"></li>
+              }
+            </ul>
+            <div class="exp__tags">
+              @for (tag of exp.tags; track tag) {
+                <span class="tag" [class.tag--accent]="$index < 2">{{ tag }}</span>
+              }
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

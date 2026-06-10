@@ -1,0 +1,13 @@
+.edu__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.edu__card {
+  display: flex; align-items: flex-start; gap: 1.25rem;
+  padding: 1.75rem; background: var(--bg-raised);
+  border: 1px solid var(--border); border-radius: 16px;
+  transition: border-color 200ms ease;
+}
+.edu__card:hover { border-color: var(--accent); }
+.edu__icon { font-size: 2rem; flex-shrink: 0; line-height: 1; }
+.edu__content h3 { font-size: 1rem; font-weight: 600; line-height: 1.4; margin-bottom: 6px; }
+.edu__institution { font-size: .875rem; color: var(--text-muted); line-height: 1.4; margin-bottom: .5rem; }
+.edu__period { font-size: .8125rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-light); }
+@media (max-width: 900px) { .edu__grid { grid-template-columns: 1fr; } }
