@@ -72,7 +72,7 @@ const STATIC_PROFILE: Profile = {
   ],
   education: [
     { degree: 'Tecnólogo em Análise e Desenvolvimento de Sistemas', institution: 'UNIPAC — Centro Universitário Presidente Antônio Carlos', period: 'Mar/2023 – Jun/2025', icon: '🎓' },
-    { degree: 'Formação Fullstack — DevQuest', institution: 'Dev em Dobro · JavaScript, TypeScript, Angular, Node.js, Jest, CI/CD', period: 'Jan/2022 – Jan/2023', icon: '📜' },
+    { degree: 'Formação Fullstack — DevQuest', institution: 'Dev em Dobro · JavaScript, TypeScript, React, Node.js, Jest, CI/CD', period: 'Jan/2022 – Jan/2023', icon: '📜' },
   ],
 };
 
