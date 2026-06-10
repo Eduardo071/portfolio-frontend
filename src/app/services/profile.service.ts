@@ -2,7 +2,7 @@ import { Injectable, inject, makeStateKey, TransferState, PLATFORM_ID } from '@a
 import { HttpClient } from '@angular/common/http';
 import { isPlatformServer } from '@angular/common';
 import { Observable, of } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { Profile } from '../models/profile.model';
 
@@ -89,12 +89,12 @@ export class ProfileService {
       return of(cached);
     }
 
+    // During SSR/prerender there is no live backend — use static data immediately
+    if (isPlatformServer(this.platformId)) {
+      return of(STATIC_PROFILE);
+    }
+
     return this.http.get<Profile>(`${environment.apiUrl}/api/profile`).pipe(
-      tap(profile => {
-        if (isPlatformServer(this.platformId)) {
-          this.transferState.set(PROFILE_KEY, profile);
-        }
-      }),
       catchError(() => of(STATIC_PROFILE))
     );
   }
